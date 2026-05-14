@@ -1,0 +1,7 @@
+content/
+preview-*.png
+layout-before-redesign.png
+preview-server*.log
+assets/photos/*.heic
+assets/photos/test.jpg
+assets/photos/wic-test.jpg

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bret Wallace | 40</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="gate" id="gate" aria-live="polite">
+      <form class="gate-panel" id="gateForm">
+        <p class="eyebrow">Bret Wallace turns 40</p>
+        <h1>For Bret, with love</h1>
+        <label for="accessCode">Birthday code</label>
+        <div class="gate-row">
+          <input id="accessCode" name="accessCode" autocomplete="off" inputmode="text" />
+          <button type="submit">Enter</button>
+        </div>
+        <p class="gate-error" id="gateError" role="status"></p>
+      </form>
+    </div>
+
+    <main class="site-shell is-locked" id="site">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">A 40th birthday keepsake</p>
+          <h1>Bret Wallace</h1>
+          <p class="hero-text">
+            A collection of love notes, memories, ridiculous lore, and the people who know exactly how lucky they are to have him.
+          </p>
+        </div>
+        <div class="hero-photo" id="heroPhoto" aria-label="Featured photo">
+          <span>40</span>
+        </div>
+      </header>
+
+      <nav class="section-nav" aria-label="Page sections">
+        <a href="#letters">Messages</a>
+        <a href="#trivia">Party questions</a>
+      </nav>
+
+      <section class="section" id="letters">
+        <div class="section-heading">
+          <p class="eyebrow">From everyone</p>
+          <h2>Messages and moments</h2>
+        </div>
+        <div class="story-stack" id="stories"></div>
+      </section>
+
+      <section class="section trivia-section" id="trivia">
+        <div class="section-heading">
+          <p class="eyebrow">From the party</p>
+          <h2>Bret trivia</h2>
+        </div>
+        <div class="trivia-grid" id="triviaGrid"></div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
