@@ -12,9 +12,14 @@ async function loadData() {
     return;
   }
 
-  const response = await fetch("data/site-data.json");
-  if (!response.ok) throw new Error("Could not load birthday data.");
-  state.data = await response.json();
+  try {
+    const response = await fetch("data/site-data.json");
+    if (response.ok) {
+      state.data = await response.json();
+    }
+  } catch {
+    state.data = null;
+  }
 }
 
 function paragraphs(text) {
@@ -40,12 +45,12 @@ function escapeHtml(value) {
 }
 
 function renderHero() {
-  if (state.data.eventDate) {
+  if (state.data?.eventDate) {
     $("#heroDate").textContent = state.data.eventDate;
   }
 
   const hero = $("#heroPhoto");
-  const heroPhoto = state.data.heroPhoto || state.data.photos[0]?.src;
+  const heroPhoto = state.data?.heroPhoto || state.data?.photos?.[0]?.src;
   if (heroPhoto) {
     const probe = new Image();
     probe.addEventListener("load", () => {
@@ -58,7 +63,9 @@ function renderHero() {
 
 function renderPartyMedia() {
   const partyMedia = $("#partyMedia");
-  const items = state.data.partyMedia || [];
+  if (partyMedia.children.length) return;
+
+  const items = state.data?.partyMedia || [];
 
   if (!items.length) {
     partyMedia.innerHTML = `
@@ -78,7 +85,6 @@ function renderPartyMedia() {
         return `
           <figure class="party-item party-video">
             <video controls preload="metadata" src="${item.src}"></video>
-            ${caption}
           </figure>
         `;
       }
@@ -95,6 +101,13 @@ function renderPartyMedia() {
 
 function renderStories() {
   const stories = $("#stories");
+  if (stories.children.length) {
+    wirePhotoFallbacks();
+    return;
+  }
+
+  if (!state.data?.notes?.length) return;
+
   stories.innerHTML = state.data.notes
     .map((note, index) => {
       const assignedPhotos = note.photos || photosForStory(state.data.photos, index, state.data.notes.length);
@@ -163,6 +176,13 @@ function wirePhotoFallbacks() {
 
 function renderTrivia() {
   const trivia = $("#triviaGrid");
+  if (trivia.children.length) {
+    wireTriviaChoices();
+    return;
+  }
+
+  if (!state.data?.questions?.length) return;
+
   trivia.innerHTML = state.data.questions
     .map((question, questionIndex) => {
       const choices = question.choices
@@ -180,7 +200,14 @@ function renderTrivia() {
     })
     .join("");
 
+  wireTriviaChoices();
+}
+
+function wireTriviaChoices() {
   document.querySelectorAll(".choice").forEach((button) => {
+    if (button.dataset.wired === "true") return;
+    button.dataset.wired = "true";
+
     button.addEventListener("click", () => {
       const card = button.closest(".trivia-card");
       const group = card.querySelector(".choice-list");
@@ -228,7 +255,8 @@ function wireGate() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (input.value.trim().toLowerCase() === state.data.accessCode.toLowerCase()) {
+    const accessCode = state.data?.accessCode || "Bret40";
+    if (input.value.trim().toLowerCase() === accessCode.toLowerCase()) {
       unlock();
     } else {
       error.textContent = "Try the birthday code again.";
@@ -248,5 +276,7 @@ async function init() {
 
 init().catch((error) => {
   console.error(error);
-  $("#gateError").textContent = "Something did not load. Refresh and try again.";
+  wireGate();
+  wirePhotoFallbacks();
+  wireTriviaChoices();
 });

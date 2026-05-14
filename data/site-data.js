@@ -429,13 +429,11 @@ window.SITE_DATA = {
     },
     {
       "type": "video",
-      "src": "assets/photos/party/party-speech-1-compressed.mp4",
-      "caption": "Party speech 1"
+      "src": "assets/photos/party/party-speech-1-compressed.mp4"
     },
     {
       "type": "video",
-      "src": "assets/photos/party/party-speech-2-small.mp4",
-      "caption": "Party speech 2"
+      "src": "assets/photos/party/party-speech-2-small.mp4"
     }
   ]
 };
