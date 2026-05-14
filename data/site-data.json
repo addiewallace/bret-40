@@ -429,8 +429,13 @@
     },
     {
       "type": "video",
-      "src": "assets/photos/party/party speech (1).mp4",
-      "caption": "Party Speech (1)"
+      "src": "assets/photos/party/party-speech-1-compressed.mp4",
+      "caption": "Party speech 1"
+    },
+    {
+      "type": "video",
+      "src": "assets/photos/party/party-speech-2-small.mp4",
+      "caption": "Party speech 2"
     }
   ]
 }
