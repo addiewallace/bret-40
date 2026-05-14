@@ -5,3 +5,4 @@ preview-server*.log
 assets/photos/*.heic
 assets/photos/test.jpg
 assets/photos/wic-test.jpg
+assets/photos/party/*.mov

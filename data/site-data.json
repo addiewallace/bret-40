@@ -404,5 +404,33 @@
     }
   ],
   "photoFormatNote": "Photos are mapped by message author. AJ.HEIC was left out for browser compatibility; AJ 2.JPG is included.",
-  "heroPhoto": "assets/photos/people/addie.jpg"
+  "heroPhoto": "assets/photos/party/bret 1.jpg",
+  "eventDate": "May 5, 2026",
+  "partyMedia": [
+    {
+      "type": "photo",
+      "src": "assets/photos/party/party 1.jpg",
+      "alt": "Bret's 40th birthday party"
+    },
+    {
+      "type": "photo",
+      "src": "assets/photos/party/party 2.jpg",
+      "alt": "Bret's 40th birthday party"
+    },
+    {
+      "type": "photo",
+      "src": "assets/photos/party/party 3.jpg",
+      "alt": "Bret's 40th birthday party"
+    },
+    {
+      "type": "photo",
+      "src": "assets/photos/party/party 4.jpeg",
+      "alt": "Bret's 40th birthday party"
+    },
+    {
+      "type": "video",
+      "src": "assets/photos/party/party speech (1).mp4",
+      "caption": "Party Speech (1)"
+    }
+  ]
 }

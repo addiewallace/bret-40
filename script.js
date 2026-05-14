@@ -7,6 +7,11 @@ const $ = (selector) => document.querySelector(selector);
 document.body.classList.add("locked");
 
 async function loadData() {
+  if (window.SITE_DATA) {
+    state.data = window.SITE_DATA;
+    return;
+  }
+
   const response = await fetch("data/site-data.json");
   if (!response.ok) throw new Error("Could not load birthday data.");
   state.data = await response.json();
@@ -35,6 +40,10 @@ function escapeHtml(value) {
 }
 
 function renderHero() {
+  if (state.data.eventDate) {
+    $("#heroDate").textContent = state.data.eventDate;
+  }
+
   const hero = $("#heroPhoto");
   const heroPhoto = state.data.heroPhoto || state.data.photos[0]?.src;
   if (heroPhoto) {
@@ -45,6 +54,43 @@ function renderHero() {
     });
     probe.src = heroPhoto;
   }
+}
+
+function renderPartyMedia() {
+  const partyMedia = $("#partyMedia");
+  const items = state.data.partyMedia || [];
+
+  if (!items.length) {
+    partyMedia.innerHTML = `
+      <div class="party-empty">
+        <p>Party photos and videos will go here.</p>
+      </div>
+    `;
+    return;
+  }
+
+  partyMedia.innerHTML = items
+    .map((item) => {
+      const alt = escapeHtml(item.alt || "Bret's 40th birthday party");
+      const caption = item.caption ? `<figcaption>${escapeHtml(item.caption)}</figcaption>` : "";
+
+      if (item.type === "video") {
+        return `
+          <figure class="party-item party-video">
+            <video controls preload="metadata" src="${item.src}"></video>
+            ${caption}
+          </figure>
+        `;
+      }
+
+      return `
+        <figure class="party-item party-photo">
+          <img src="${item.src}" alt="${alt}" loading="eager" />
+          ${caption}
+        </figure>
+      `;
+    })
+    .join("");
 }
 
 function renderStories() {
@@ -195,6 +241,7 @@ async function init() {
   await loadData();
   renderHero();
   renderStories();
+  renderPartyMedia();
   renderTrivia();
   wireGate();
 }

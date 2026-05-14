@@ -158,6 +158,14 @@ input {
   line-height: 1.55;
 }
 
+.hero-date {
+  margin: 20px 0 0;
+  color: var(--gold);
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(1.45rem, 3vw, 2.4rem);
+  font-weight: 750;
+}
+
 .hero-photo {
   position: relative;
   display: grid;
@@ -336,6 +344,54 @@ input {
   display: grid;
 }
 
+.party-section {
+  background: #eef4f0;
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.party-item {
+  margin: 0;
+}
+
+.party-item img,
+.party-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 14px 36px rgba(48, 36, 25, 0.14);
+  background: #fff;
+}
+
+.party-item figcaption {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.party-empty {
+  grid-column: 1 / -1;
+  padding: clamp(30px, 6vw, 64px);
+  border: 1px dashed rgba(33, 29, 28, 0.28);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.party-empty p {
+  margin: 0;
+  font-weight: 750;
+}
+
 .trivia-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -422,6 +478,10 @@ input {
     grid-template-columns: 1fr;
   }
 
+  .party-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .story-card,
   .story-card:nth-child(even) {
     grid-template-columns: 1fr;
@@ -463,6 +523,10 @@ input {
   }
 
   .story-photos.photo-count-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .party-grid {
     grid-template-columns: 1fr;
   }
 }
